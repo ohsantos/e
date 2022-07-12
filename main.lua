@@ -1,12 +1,12 @@
--- RE WRITE
-
+-- Kohl Smasher made by Korabi#8910
+repeat task.wait() until game:IsLoaded()
 local s, e =
     pcall(
     function()
         function pr(t)
             print("Kohl Smasher: " .. t .. " Loaded")
         end
-        local gameFlr = game.Workspace.Terrain._Game
+        local gameFlr = game.Workspace.Terrain:WaitForChild("_Game")
         local adminFlr = gameFlr.Admin
         local plyrs = game:GetService("Players")
         local rns = game:GetService("RunService")

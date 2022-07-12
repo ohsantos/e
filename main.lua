@@ -1,56 +1,41 @@
--- Server crasher script made by Korabi#8910
+-- RE WRITE
 
 
+local whitelisted = game:HttpGet("https://raw.githubusercontent.com/Korabi-dev/roblox-crasher/main/whitelisted.json")
+whitelisted = game:GetService("HttpService"):JSONDecode(whitelisted)
+if not whitelisted then whitelisted = {users = {}} end
 
-
-
-
--- Touch this = I bite u
-local gameFlr = workspace.Terrain._Game
-local adminFlr = gameFlr.Admin
-local plyrs = game:GetService("Players")
-local rns = game:GetService("RunService")
-
-
-
-
-
---[[
-Settings; Change anything youd like here but make sure that it is of the right type.
-]]--
-
-local name = "Kohl Smasher"
-function scExecuted()
-    local r = false;
-local logs = game:GetService("LogService"):GetLogHistory()
-for i, v in pairs(logs) do 
-if table.find({"Access Granted", "ran", "API"}, v.message) then
-r = true;
-return true;
-end
-end
-return r
+function notif(title, text, duration)
+local options = {
+Title = title,
+Text = text,
+Duration = duration,
+}
+game:GetService("StarterGui"):SetCore("SendNotification", options)
 end
 
-function kill(msg)
-    warn(msg)
-    script.Source = ""
-    a:KILL()
-end
-
-
-function hop(time)
-if not time then time = 0 end
-task.wait(time)
+function hop()
 local httpres = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .."/servers/Public?sortOrder=Asc&limit=100")
 httpres = game:GetService("HttpService"):JSONDecode(httpres)
 local servers = httpres.data
 if not servers then warn("Servers couldnt be fetched") end
 for i, server in pairs(servers) do 
-    if server.id ~= game.JobId and server.playing ~= server.maxPlayers and server.ping > 0 then
+    if server.id ~= game.JobId and server.playing ~= server.maxPlayers then
         game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, server.id, game:GetService("Players").LocalPlayer)
     end 
 end
+end
+
+function kill(msg)
+    notif("Script Killed!", msg .. " | You will now be teleported to a different server", 10)
+    "UR FAT ASS FUCKING MOM?":Kill()
+end
+
+for i , v in pairs(whitelisted.users) do 
+    if game:GetService("Players"):FindFirstChild(v) or game:GetService("Players"):GetPlayerByUserId(v) then
+    kill("A whitelisted player is in the server") 
+    hop()
+    end
 end
 
 
@@ -59,70 +44,9 @@ function chat(msg)
 end
 
 
-function notif(title, msg, duration)
-if not msg then msg = "" end
-if not title then title = "What the fuck??" end
-if not duration then duration = 10 end
-local options = {
-Title = title,
-Text = msg,
-Duration = duration,
-}
-game:GetService("StarterGui"):SetCore("SendNotification", options)
-end
-
-function freezeCrash()
-    for i = 1, 20 do
-        chat("size all .3")
-        end
-        chat("freeze all")
-        for i = 1, 20 do
-        chat("size all 10")
-        end
-        chat("clone all")
-        for i = 1, 20 do
-        chat("size all 9")
-        end
-        for i = 1, 20 do
-        chat("size all 10")
-        end
-        for i = 1, 20 do
-        chat("freeze all")
-        end
-        for i =1, 20 do
-        chat("clone all")
-        end
-           if not hopped then
-           hop(10)
-           hopped = true;  
-           end
-end
-
---[[
 function grab()
-    while task.wait() do
-    coroutine.wrap(function() 
-            local pads = game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetChildren("Head")
-            for i, pad in pairs(pads) do
-                coroutine.wrap(function()
-                    pcall(function()
-                        local cre = pad.Head
-                        local spr = game.Players.LocalPlayer.Character:FindFirstChild("Head")
-                        firetouchinterest(cre, spr, 0)
-                        task.wait()
-                        firetouchinterest(cre, spr, 1)
-                        
-                        if pad.Name ~= game.Players.LocalPlayer.Name.."'s admin" then
-                            fireclickdetector(adminFlr.Regen.ClickDetector, 0)
-                        end
-                    end)
-                end)()
-        end
-    end)()
-    end
-    end
-]]--
-function grab()
+    coroutine.wrap(function()
+        while task.wait() do
     local pads = game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetChildren("Head")
     for i, pad in pairs(pads) do
         coroutine.wrap(function()
@@ -139,47 +63,32 @@ function grab()
             end)
         end)()
 end
+end
+end)
+end
 
-function vampCrash()
-    local i = 0;
-    while i <= 5 do 
-        chat("gear me 94794847")
-        i = i + 1
+function crash() 
+grab()
+task.wait(1)
+coroutine.wrap(function() 
+    for i = 1, 5 do
+    chat("gear me 94794847")
     end
-    task.wait(1)
+    
     for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
                 if v:IsA("Tool") then
                      game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):EquipTool(v)
                 end
     end
-    task.wait(0.2)
-        --[[
-        while task.wait() do 
-            chat("size me 0000000000000000000.3")
-        end]]--
-    while game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
-        task.wait()
-        chat("size me 0000000000000000000.3")
+    
+    while task.wait() do 
+    chat("size me 0000000000000000000.3")
     end
- while not game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
-            task.wait()
-      chat("gear me 94794847")
-    end
+end)
 end
-for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-    Spawn(function()
-            if v:IsA("Tool") then
-                v.Parent = game.Players.LocalPlayer.Character
-            end
-        end)
-    while game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
-        task.wait()
-        chat("size me 0000000000000000000.3")
-    end
-end
-end
-notif(name.. " Loaded.")
-grab()
-vampCrash()
-hop(5)
 
+
+notif("Kohl Smasher", "Loaded.", 5)
+crash()
+task.wait(5)
+hop()

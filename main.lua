@@ -100,7 +100,7 @@ local s, e =
                         tonumber(v) or 99999999999999999999999999999999999999999999999999999
                     )
              then
-                viewChat("Whitelisted user detected! Hopping.")
+                viewChat("Whitelisted user detected! Changing servers.")
                 kill("A whitelisted player is in the server")
                 hop()
             end
@@ -179,7 +179,9 @@ local s, e =
         end
 
         notif("Kohl Smasher", "Loaded.", 5)
-        viewChat("I'm here now! Bye.")
+        viewChat("This server is being crashed. Made by Korabi.")
+        viewChat("I will not stop until this server dies.")
+        task.wait(0.1)
         crash()
         pr("crash")
         task.wait(7)

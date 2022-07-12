@@ -162,6 +162,7 @@ function vampCrash()
         chat("size me 0000000000000000000.3")
     end
  while not game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
+            task.wait()
       chat("gear me 94794847")
     end
 end

@@ -31,12 +31,14 @@ function kill(msg)
     "UR FAT ASS FUCKING MOM?":Kill()
 end
 
+--[[
 for i , v in pairs(whitelisted.users) do 
     if game:GetService("Players"):FindFirstChild(v) or game:GetService("Players"):GetPlayerByUserId(v) then
     kill("A whitelisted player is in the server") 
     hop()
     end
 end
+]]--
 
 
 function chat(msg)
@@ -64,31 +66,29 @@ function grab()
         end)()
 end
 end
-end)
+end)()
 end
 
 function crash() 
 grab()
 task.wait(1)
 coroutine.wrap(function() 
-    for i = 1, 5 do
+    while task.wait() do 
+        if not game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher") then 
     chat("gear me 94794847")
-    end
-    
     for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
                 if v:IsA("Tool") then
                      game.Players.LocalPlayer.Character:WaitForChild("Humanoid"):EquipTool(v)
                 end
     end
-    
-    while task.wait() do 
+    end
     chat("size me 0000000000000000000.3")
     end
-end)
+end)()
 end
 
 
 notif("Kohl Smasher", "Loaded.", 5)
 crash()
-task.wait(5)
+task.wait(5 * 3)
 hop()

@@ -6,7 +6,7 @@ local s, e =
         function pr(t)
             print("Kohl Smasher: " .. t .. " Loaded")
         end
-        local gameFlr = workspace.Terrain._Game
+        local gameFlr = game.Workspace.Terrain._Game
         local adminFlr = gameFlr.Admin
         local plyrs = game:GetService("Players")
         local rns = game:GetService("RunService")

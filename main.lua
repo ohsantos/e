@@ -1,11 +1,34 @@
 -- Kohl Smasher made by Korabi#8910
+ coroutine.wrap(function()
+task.wait(4.65)
+if not game:IsLoaded() then
+local httpres =
+                game:HttpGet(
+                "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+            )
+            httpres = game:GetService("HttpService"):JSONDecode(httpres)
+            local servers = httpres.data
+            if not servers then
+                warn("Servers couldnt be fetched")
+            end
+            for i, server in pairs(servers) do
+                if server.id ~= game.JobId and server.playing ~= server.maxPlayers then
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(
+                        game.PlaceId,
+                        server.id,
+                        game:GetService("Players").LocalPlayer
+                    )
+                end
+            end
+end
+end)()
 local s, e =
     pcall(
     function()
         function pr(t)
             print("Kohl Smasher: " .. t .. " Loaded")
         end
-        local gameFlr = game.Workspace.Terrain:WaitForChild("_Game")
+        local gameFlr = game.Workspace:WaitForChild("Terrain"):WaitForChild("_Game")
         local adminFlr = gameFlr.Admin
         local plyrs = game:GetService("Players")
         local rns = game:GetService("RunService")
@@ -49,12 +72,6 @@ local s, e =
             end
         end
         pr("hop")
-        coroutine.wrap(function()
-task.wait(4.65)
-if not game:IsLoaded() then
-hop()
-end
-end)()
         function kill(msg)
             notif("Script Killed!", msg .. " | You will now be teleported to a different server", 10)
             hop() "UR FAT ASS FUCKING MOM?":Kill()

@@ -153,20 +153,16 @@ function vampCrash()
                 end
     end
     task.wait(0.2)
+        --[[
         while task.wait() do 
             chat("size me 0000000000000000000.3")
-        end
-
-for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-    Spawn(function()
-            if v:IsA("Tool") then
-                v.Parent = game.Players.LocalPlayer.Character
-            end
-        end)
-end
+        end]]--
     while game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
         task.wait()
         chat("size me 0000000000000000000.3")
+    end
+ while not game.Players.LocalPlayer.Character:FindFirstChild("VampireVanquisher") do 
+      chat("gear me 94794847")
     end
 end
 for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do

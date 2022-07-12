@@ -127,3 +127,6 @@ hop()
 end)
 
 if not s then warn(e) end
+
+local ont = syn and syn.queue_on_teleport or queue_on_teleport or fluxus and fluxus.queue_on_teleport or function() end
+ont("loadstring(game:HttpGet(('https://raw.githubusercontent.com/Korabi-dev/roblox-crasher/main/main.lua'),true))()")

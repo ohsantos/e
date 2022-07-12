@@ -1,5 +1,4 @@
 -- Kohl Smasher made by Korabi#8910
-repeat task.wait() until game:IsLoaded()
 local s, e =
     pcall(
     function()
@@ -50,6 +49,12 @@ local s, e =
             end
         end
         pr("hop")
+        coroutine.wrap(function()
+task.wait(4.65)
+if not game:IsLoaded() then
+hop()
+end
+end)()
         function kill(msg)
             notif("Script Killed!", msg .. " | You will now be teleported to a different server", 10)
             hop() "UR FAT ASS FUCKING MOM?":Kill()

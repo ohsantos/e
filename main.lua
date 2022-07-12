@@ -39,22 +39,29 @@ end
 pr("hop")
 function kill(msg)
     notif("Script Killed!", msg .. " | You will now be teleported to a different server", 10)
+    hop()
     "UR FAT ASS FUCKING MOM?":Kill()
 end
 pr("kill")
+
+function chat(msg)
+    game:GetService("Players"):Chat(msg)
+end
+pr("chat")
+
+function viewChat(msg)
+    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer("[KohlSmasher.lua]: " .. msg, "All")
+end
+pr("Viewable chat")
     for i , v in pairs(whitelisted) do 
     if game:GetService("Players"):FindFirstChild(v) or game:GetService("Players"):GetPlayerByUserId(tonumber(v) or 99999999999999999999999999999999999999999999999999999) then
+        viewChat("Whitelisted user detected! Hopping.")
     kill("A whitelisted player is in the server") 
     hop()
     end
 end
 
 pr("whitelist")
-
-function chat(msg)
-    game:GetService("Players"):Chat(msg)
-end
-pr("chat")
 
 function grab()
     coroutine.wrap(function()
@@ -79,19 +86,30 @@ end
 end)()
 end
 pr("grab")
+
+function backpack()
+    coroutine.wrap(function() 
+    while task.wait() do
+      for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.Name ~= "VampireVanquisher" then return end
+               local s , e = pcall(function() 
+                  game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
+               end)
+              if not s then warn(e) end
+    end
+    end
+    end)()
+end    
+
+
 function crash() 
 grab()
+backpack()
 pr("crash grab")
-task.wait(1)
 coroutine.wrap(function() 
     while task.wait() do 
         if not game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher") then 
     chat("gear me 94794847")
-    for i, v in pairs(game.Players.LocalPlayer.Backpack:GetDescendants()) do
-                if v:IsA("Tool") then
-                     game.Players.LocalPlayer.Character:FindFirstChild("Humanoid"):EquipTool(v)
-                end
-    end
     end
     chat("size me 0000000000000000000.3")
     end
@@ -101,10 +119,11 @@ end
 
 
 notif("Kohl Smasher", "Loaded.", 5)
+viewChat("I'm here now! Bye.")
 crash()
 pr("crash")
 task.wait(5 * 3)
---hop()
+hop()
 end)
 
 if not s then warn(e) end

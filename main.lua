@@ -182,7 +182,7 @@ local s, e =
         viewChat("I'm here now! Bye.")
         crash()
         pr("crash")
-        task.wait(5 * 2)
+        task.wait(7)
         hop()
     end
 )

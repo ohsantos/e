@@ -1,6 +1,6 @@
 -- Kohl Smasher made by Korabi#8910
  coroutine.wrap(function()
-task.wait(4.65)
+task.wait(5)
 if not game:IsLoaded() then
 local httpres =
                 game:HttpGet(
@@ -179,7 +179,7 @@ local s, e =
         viewChat("I'm here now! Bye.")
         crash()
         pr("crash")
-        task.wait(5 * 3)
+        task.wait(5 * 2)
         hop()
     end
 )

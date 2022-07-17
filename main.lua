@@ -82,8 +82,13 @@ local s, e =
         pr("kill")
 
         function chat(msg)
-            game:GetService("Players"):Chat(msg)
-        end
+    task.wait()
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:CaptureFocus()
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar.Text = msg
+    game.Players:chat(msg)
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar.Text = ""
+    game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatBarParentFrame.Frame.BoxFrame.Frame.ChatBar:ReleaseFocus()
+    end
         pr("chat")
 
         function viewChat(msg)

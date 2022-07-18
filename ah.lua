@@ -11,5 +11,5 @@ end
 
 rconsoleclear()
 log("Loading Vecko's crasher....", "red")
-repeat task.wait() until game:FindFirstChild("Workspace"):FindFirstChild("Terrain"):FindFirstChild("_Game")
+repeat task.wait() until game:IsLoaded()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/reloxz/endofAH/main/autocrasher.txt'),true))()
